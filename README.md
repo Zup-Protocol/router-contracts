@@ -1,66 +1,45 @@
-## Foundry
+## ⚡️⚡️⚡️ Router Contracts
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This repository contains the Router Contracts for the **Zup Protocol**.
 
-Foundry consists of:
+Router Contracts are all contracts used to deposit into liquidity pools from other DEXes.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+## Getting Started
 
-## Documentation
+### Dependencies
+- **Git**
+  - To know if Git is installed, run `git --version` you should see a response like `git version x.x.x`.
+  - If Git is not installed, head over to [Installing Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
-https://book.getfoundry.sh/
+- **Foundry**
 
-## Usage
+  - To know if Foundry is installed, run `forge --version` you should see a response like `forge x.x.x`.
+  - If Foundry is not installed, head over to [Foundry Installation](https://book.getfoundry.sh/getting-started/installation)
 
-### Build
+- **Node.js**
 
-```shell
-$ forge build
+  - To know if Node.js is installed, run `node --version` you should see a response like `vX.X.X`.
+  - If Node.js is not installed, head over to [How to install Node.js](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs)
+
+- **Yarn**
+
+  - To know if Yarn is installed, run `yarn --version` you should see a response like `yarn x.x.x`.
+  - If Yarn is not installed, head over to [Yarn installation](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable)
+
+### Installation
+1. Clone the repository
+2. Run `yarn` to install all the dependencies. It will also install forge libraries.
+3. Nothing more! All done ⚡️
+
+### Running Tests
+To run all the tests, just open your terminal and type:
+```bash 
+yarn test
 ```
 
-### Test
+## Committing
+- Every commit should follow the [Conventional Commits](https://www.conventionalcommits.org) format (`<type>[optional scope]: <description>`). In other case, the commit will be rejected
 
-```shell
-$ forge test
-```
 
-### Format
 
-```shell
-$ forge fmt
-```
 
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```

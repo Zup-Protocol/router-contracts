@@ -40,6 +40,4 @@ yarn test
 ## Committing
 - Every commit should follow the [Conventional Commits](https://www.conventionalcommits.org) format (`<type>[optional scope]: <description>`). In other case, the commit will be rejected
 
-
-
-
+- Commits to the main branch are not allowed by default. Pull requests should be opened and then merged into the main branch

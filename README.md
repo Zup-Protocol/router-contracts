@@ -37,6 +37,25 @@ To run all the tests, just open your terminal and type:
 yarn test
 ```
 
+it will run the unit, fuzz and fork tests.
+
+It’s not recommended to run it every time you want to test something specific, as it will also run the fork tests, which take a lot of time. Instead you can just run the tests you want to test using `forge test --mt {TEST_NAME}`. If you want to run a specific group of tests, you can use the commands below:
+
+To run only the unit tests:
+```bash
+yarn testunit
+```
+
+To run only the Fuzz tests:
+```bash
+yarn testfuzz
+```
+
+To run only the Fork tests:
+```bash
+yarn testfork
+```
+
 ## Committing
 - Every commit should follow the [Conventional Commits](https://www.conventionalcommits.org) format (`<type>[optional scope]: <description>`). In other case, the commit will be rejected
 

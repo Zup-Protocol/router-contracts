@@ -2,5 +2,6 @@
   "solidity.packageDefaultDependenciesContractsDirectory": "src",
   "solidity.packageDefaultDependenciesDirectory": "lib",
   "solidity.monoRepoSupport": false,
-  "solidity.compileUsingRemoteVersion": "0.8.26"
+  "solidity.compileUsingRemoteVersion": "0.8.26",
+  "solidity.formatter": "prettier"
 }

@@ -4,7 +4,7 @@
   "description": "this repository contains the Router Contracts for the Zup Protocol",
   "scripts": {
     "test": "forge test",
-    "lint": "solhint --config .solhint.json \"src/*.sol\"",
+    "lint": "solhint --config .solhint.json \"src/**/*.sol\"",
     "prepare": "husky",
     "postinstall": "forge install"
   },

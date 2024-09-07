@@ -225,6 +225,7 @@ contract ZupRouterDepositFuzzTest is ZupRouterBaseTest {
   ) public {
     vm.assume(feeAdmin != address(positionManager));
     vm.assume(feeAdmin != address(this));
+    vm.assume(feeAdmin != address(0));
 
     feeController.setJoinPoolFee(feeBips);
     feeController.transferOwnership(feeAdmin);
@@ -275,6 +276,7 @@ contract ZupRouterDepositFuzzTest is ZupRouterBaseTest {
   ) public {
     vm.assume(feeAdmin != address(positionManager));
     vm.assume(feeAdmin != address(this));
+    vm.assume(feeAdmin != address(0));
 
     feeController.setJoinPoolFee(feeBips);
     feeController.transferOwnership(feeAdmin);
@@ -325,6 +327,7 @@ contract ZupRouterDepositFuzzTest is ZupRouterBaseTest {
   ) public {
     vm.assume(feeAdmin != address(positionManager));
     vm.assume(feeAdmin != address(this));
+    vm.assume(feeAdmin != address(0));
 
     feeController.setJoinPoolFee(feeBips);
     feeController.transferOwnership(feeAdmin);

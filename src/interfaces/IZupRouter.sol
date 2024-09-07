@@ -9,6 +9,9 @@ interface IZupRouter {
    * @param lpTokenId the ID of the LP NFT
    * @param token0 the token0 of the pool
    * @param token1 the token1 of the pool
+   * @param token0Amount the amount of token0 that was sent to Zup Router (with fees included)
+   * @param token1Amount the amount of token1 that was sent to Zup Router (with fees included)
+   * @param positionManager the address of the contract responsible for adding liquidity into the Pool
    * @param user the user who deposited into the Pool
    */
   event ZupRouter__Deposited(

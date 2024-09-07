@@ -5,9 +5,15 @@ libs = ["lib"]
 solc = "0.8.26"
 evm_version = "cancun"
 
-
 [fuzz]
 runs = 1000
+max_test_rejects = 65536
+dictionary_weight = 40
+include_storage = true
+include_push_bytes = true
+
+[fuzz.ci]
+runs = 10000
 max_test_rejects = 65536
 dictionary_weight = 40
 include_storage = true

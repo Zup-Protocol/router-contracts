@@ -7,14 +7,15 @@ Router Contracts are all contracts used to deposit into liquidity pools from oth
 ## Getting Started
 
 ### Dependencies
-- **Git**
-  - To know if Git is installed, run `git --version` you should see a response like `git version x.x.x`.
-  - If Git is not installed, head over to [Installing Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-
 - **Foundry**
 
   - To know if Foundry is installed, run `forge --version` you should see a response like `forge x.x.x`.
   - If Foundry is not installed, head over to [Foundry Installation](https://book.getfoundry.sh/getting-started/installation)
+
+- **Slither**
+
+  - To know if Slither is installed, run `slither --version` you should see a response like `x.x.x`.
+  - If Slither is not installed, head over to [How to install slither](https://github.com/crytic/slither?tab=readme-ov-file#how-to-install)
 
 - **Node.js**
 
@@ -35,6 +36,33 @@ Router Contracts are all contracts used to deposit into liquidity pools from oth
 To run all the tests, just open your terminal and type:
 ```bash 
 yarn test
+```
+
+it will run the unit, fuzz and fork tests.
+
+It’s not recommended to run it every time you want to test something specific, as it will also run the fork tests, which take a lot of time and needs internet. Instead you can just run the tests you want to test using `forge test --mt {TEST_NAME}`. If you want to run a specific group of tests, you can use the commands below:
+
+To run only the unit tests:
+```bash
+yarn testunit
+```
+
+To run only the Fuzz tests:
+```bash
+yarn testfuzz
+```
+
+To run only the Fork tests (needs internet connection):
+```bash
+yarn testfork
+```
+
+### Running Slither
+
+To run the slither static analysis, just open your terminal and type:
+
+```bash
+yarn analyze
 ```
 
 ## Committing

@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "this repository contains the Router Contracts for the Zup Protocol",
   "scripts": {
-    "test": "forge test",
-    "lint": "solhint --config .solhint.json \"src/*.sol\"",
+    "test": "forge test -vvv",
+    "testunit": "forge test --mp 'test/unit/**/*.sol' -vvv",
+    "testfuzz": "forge test --mp 'test/fuzz/**/*.sol' -vvv",
+    "testfork": "forge test --mp 'test/fork/**/*.sol' -vvv",
+    "lint": "solhint --config .solhint.json \"src/**/*.sol\"",
+    "analyze": "slither .",
     "prepare": "husky",
     "postinstall": "forge install"
   },

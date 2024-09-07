@@ -28,7 +28,7 @@ jobs:
               uses: crytic/slither-action@v0.4.0
               with:
                 fail-on: all
-                target: 'src/'
+                target: 'src/**/*.sol'
 
             - name: "Run tests"
               run: forge test -vvv

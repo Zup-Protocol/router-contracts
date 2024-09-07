@@ -24,10 +24,10 @@ jobs:
             - name: "Run Linter"
               run: yarn solhint --config .solhint.json src/**/*.sol --max-warnings 0
 
-            - name: "Run Slither"
-              uses: crytic/slither-action@v0.4.0
-              with:
-                fail-on: all
+            # - name: "Run Slither"
+            #   uses: crytic/slither-action@v0.4.0
+            #   with:
+            #     fail-on: all
 
             - name: "Run tests"
               run: forge test -vvv

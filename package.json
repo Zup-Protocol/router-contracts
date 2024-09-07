@@ -17,8 +17,8 @@
     "@commitlint/cli": "^19.4.1",
     "@commitlint/config-conventional": "^19.4.1",
     "husky": "^9.1.5",
+    "@chainlink/solhint-plugin-chainlink-solidity": "^1.0.1",
     "solhint": "^5.0.3",
-    "solhint-plugin-chainlink-solidity": "git+https://github.com/smartcontractkit/chainlink-solhint-rules.git#v1.3.0",
     "solhint-plugin-prettier": "^0.1.0"
   }
 }

@@ -9,8 +9,7 @@
     "testfork": "forge test --mp 'test/fork/**/*.sol' -vvv",
     "lint": "solhint --config .solhint.json \"src/**/*.sol\"",
     "analyze": "slither .",
-    "prepare": "husky",
-    "postinstall": "forge install"
+    "prepare": "husky"
   },
   "license": "GPL-2.0-only",
   "devDependencies": {
@@ -18,7 +17,7 @@
     "@commitlint/config-conventional": "^19.4.1",
     "husky": "^9.1.5",
     "solhint": "^5.0.3",
-    "solhint-plugin-chainlink-solidity": "git+https://github.com/smartcontractkit/chainlink-solhint-rules.git#v1.3.0",
+    "solhint-plugin-chainlink-solidity": "git+https://git@github.com/smartcontractkit/chainlink-solhint-rules.git#v1.3.0",
     "solhint-plugin-prettier": "^0.1.0"
   }
 }

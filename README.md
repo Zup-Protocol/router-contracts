@@ -29,7 +29,7 @@ Router Contracts are all contracts used to deposit into liquidity pools from oth
 
 ### Installation
 1. Clone the repository
-2. Run `yarn` to install all the dependencies. It will also install forge libraries.
+2. Run `yarn && forge install` to install all the packages used by the project
 3. Nothing more! All done ⚡️
 
 ### Running Tests

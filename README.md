@@ -39,7 +39,7 @@ yarn test
 
 it will run the unit, fuzz and fork tests.
 
-It’s not recommended to run it every time you want to test something specific, as it will also run the fork tests, which take a lot of time. Instead you can just run the tests you want to test using `forge test --mt {TEST_NAME}`. If you want to run a specific group of tests, you can use the commands below:
+It’s not recommended to run it every time you want to test something specific, as it will also run the fork tests, which take a lot of time and needs internet. Instead you can just run the tests you want to test using `forge test --mt {TEST_NAME}`. If you want to run a specific group of tests, you can use the commands below:
 
 To run only the unit tests:
 ```bash
@@ -51,7 +51,7 @@ To run only the Fuzz tests:
 yarn testfuzz
 ```
 
-To run only the Fork tests:
+To run only the Fork tests (needs internet connection):
 ```bash
 yarn testfork
 ```

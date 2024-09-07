@@ -4,6 +4,7 @@ pragma solidity 0.8.26;
 import {IZupRouter, PoolToken} from "src/interfaces/IZupRouter.sol";
 import {SafeERC20, IERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import {FeeController} from "src/contracts/FeeController.sol";
 
 //
 //                                                   XEX
@@ -47,13 +48,16 @@ contract ZupRouter is IZupRouter {
   using SafeERC20 for IERC20;
 
   IERC20 private immutable i_wrappedNative;
+  FeeController private immutable i_feeController;
 
   /**
    * @param wrappedNative the address of the wrapped native token of the current chain.
    * e.g WETH on Ethereum or WAVAX on Avalanche
+   * @param feeController the address of the FeeController contract
    *  */
-  constructor(address wrappedNative) {
+  constructor(address wrappedNative, address feeController) {
     i_wrappedNative = IERC20(wrappedNative);
+    i_feeController = FeeController(feeController);
   }
 
   /// @inheritdoc IZupRouter
@@ -82,10 +86,22 @@ contract ZupRouter is IZupRouter {
       token1.token.forceApprove(positionManager, token1.amount);
     }
 
-    (bool success, bytes memory dataReturned) = positionManager.call(depositData);
-    if (!success) revert ZupRouter__FailedToDeposit(positionManager, depositData, dataReturned);
+    {
+      (uint256 feeToken0, uint256 feeToken1) = i_feeController.calculateJoinPoolFee(
+        isToken0Native ? msg.value : token0.amount,
+        isToken1Native ? msg.value : token1.amount
+      );
 
-    tokenId = abi.decode(dataReturned, (uint256));
+      address feeReceiver = i_feeController.getFeeReceiver();
+
+      (isToken0Native ? i_wrappedNative : token0.token).transfer(feeReceiver, feeToken0);
+      (isToken1Native ? i_wrappedNative : token1.token).transfer(feeReceiver, feeToken1);
+    }
+
+    (bool success, bytes memory answer) = positionManager.call(depositData);
+    if (!success) revert ZupRouter__FailedToDeposit(positionManager, depositData, answer);
+
+    tokenId = abi.decode(answer, (uint256));
     address lpOwner = ERC721(positionManager).ownerOf(tokenId);
 
     if (lpOwner != msg.sender) revert ZupRouter__InvalidLpOwner(lpOwner, msg.sender);

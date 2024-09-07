@@ -5,7 +5,6 @@ import {ZupRouterBaseTest, IZupRouter} from "test/ZupRouterBaseTest.t.sol";
 import {PoolToken} from "src/types/PoolToken.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-/// @dev Unit tests for the ZupRouter deposit function
 contract ZupRouterDepositUnitTest is ZupRouterBaseTest {
   function setUp() public override {
     super.setUp();

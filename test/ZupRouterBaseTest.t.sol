@@ -6,10 +6,12 @@ import {WrappedNativeMock} from "test/mocks/WrappedNative.mock.sol";
 import {PositionManagerMock} from "test/mocks/PositionManager.mock.sol";
 import {Test} from "forge-std/Test.sol";
 import {ERC20Mock} from "@openzeppelin/contracts/mocks/token/ERC20Mock.sol";
+import {FeeController} from "src/contracts/FeeController.sol";
 
 contract ZupRouterBaseTest is Test {
   WrappedNativeMock internal wrappedNative = new WrappedNativeMock();
-  IZupRouter internal zupRouter = new ZupRouter(address(wrappedNative));
+  FeeController internal feeController;
+  IZupRouter internal zupRouter;
   ERC20Mock internal token0;
   ERC20Mock internal token1;
   PositionManagerMock internal positionManager = new PositionManagerMock();
@@ -29,9 +31,11 @@ contract ZupRouterBaseTest is Test {
   }
 
   function setUp() public virtual {
+    feeController = new FeeController(0, address(this));
+    zupRouter = new ZupRouter(address(wrappedNative), address(feeController));
+
     token0 = new ERC20Mock();
     token1 = new ERC20Mock();
-
     _setupAddress(address(this));
     _setupApprovals();
   }

@@ -5,6 +5,7 @@ import {Test} from "forge-std/Test.sol";
 import {ZupRouter, IZupRouter} from "src/contracts/ZupRouter.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import {FeeController} from "src/contracts/FeeController.sol";
 
 enum ForkNetwork {
   ETHEREUM,
@@ -55,7 +56,7 @@ contract BaseForkTest is Test {
 
   function setUp() public virtual {
     vm.createSelectFork(networkParams.rpc);
-    zupRouter = new ZupRouter(address(networkParams.wrappedNative));
+    zupRouter = new ZupRouter(address(networkParams.wrappedNative), address(new FeeController(0, address(this))));
     _mintUSDC(address(this), 999999999e6);
     _mintWrappedNative(9999999e18);
   }

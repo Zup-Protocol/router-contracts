@@ -4,8 +4,8 @@ pragma solidity 0.8.26;
 import {PoolToken} from "src/contracts/ZupRouter.sol";
 import {ZupRouterBaseTest, IZupRouter} from "test/ZupRouterBaseTest.t.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import {Ownable2Step} from "@openzeppelin/contracts/access/Ownable2Step.sol";
 
-/// @dev Fuzz tests for the ZupRouter deposit function
 contract ZupRouterDepositFuzzTest is ZupRouterBaseTest {
   function setUp() public override {
     super.setUp();
@@ -215,5 +215,55 @@ contract ZupRouterDepositFuzzTest is ZupRouterBaseTest {
       address(positionManager),
       callData
     );
+  }
+
+  function testFuzz_deposit_feeIsTakenCorrectly(
+    uint160 depositAmountToken0,
+    uint160 depositAmountToken1,
+    uint8 feeBips,
+    address feeAdmin
+  ) public {
+    vm.assume(feeAdmin != address(positionManager));
+    vm.assume(feeAdmin != address(this));
+
+    feeController.setJoinPoolFee(feeBips);
+    feeController.transferOwnership(feeAdmin);
+
+    vm.prank(feeAdmin);
+    Ownable2Step(feeController).acceptOwnership();
+
+    address feeReceiver = feeController.getFeeReceiver();
+
+    (uint256 token0Fee, uint256 token1Fee) = feeController.calculateJoinPoolFee(
+      depositAmountToken0,
+      depositAmountToken1
+    );
+
+    bytes memory callData = positionManager.getMintCallData(
+      address(token0),
+      address(token1),
+      depositAmountToken0 - token0Fee,
+      depositAmountToken1 - token1Fee,
+      address(this)
+    );
+
+    uint256 token0FeeAdminBalanceBeforeDeposit = token0.balanceOf(feeReceiver);
+    uint256 token1FeeAdminBalanceBeforeDeposit = token1.balanceOf(feeReceiver);
+
+    zupRouter.deposit(
+      PoolToken(token0, depositAmountToken0),
+      PoolToken(token1, depositAmountToken1),
+      address(positionManager),
+      callData
+    );
+
+    uint256 token0FeeAdminBalanceAfterDeposit = token0.balanceOf(feeReceiver);
+    uint256 token1FeeAdminBalanceAfterDeposit = token1.balanceOf(feeReceiver);
+
+    uint256 receivedToken0Fee = token0FeeAdminBalanceAfterDeposit - token0FeeAdminBalanceBeforeDeposit;
+    uint256 receivedToken1Fee = token1FeeAdminBalanceAfterDeposit - token1FeeAdminBalanceBeforeDeposit;
+
+    assertEq(receivedToken0Fee, token0Fee, "token0 fee mismatch");
+    assertEq(receivedToken1Fee, token1Fee, "token1 fee mismatch");
   }
 }

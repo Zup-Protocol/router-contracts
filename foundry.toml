@@ -5,18 +5,17 @@ libs = ["lib"]
 solc = "0.8.26"
 evm_version = "cancun"
 
-[profile.ci]
-fuzz_runs = 100_000
-fuzz_dictionary_weight = 40
-fuzz_include_storage = true
-fuzz_include_push_bytes = true
-
-[fuzz]
+[profile.default.fuzz]
 runs = 10_000
 max_test_rejects = 65536
 dictionary_weight = 40
 include_storage = true
 include_push_bytes = true
 
+[profile.ci.fuzz]
+runs = 100_000
+dictionary_weight = 40
+include_storage = true
+include_push_bytes = true
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options

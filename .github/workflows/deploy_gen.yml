@@ -1,0 +1,26 @@
+name: Generate Smart Contract Deployment Link
+
+on:
+    pull_request:
+        branches:
+            - main
+    # push:
+    #     branches:
+    #         - main
+
+jobs:
+    link-gen:
+        name: "Generate Deployment Link"
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Install Node
+              uses: actions/setup-node@v4
+
+            - name: Install Thirdweb CLI
+              run: npm install -g thirdweb
+
+            - name: Generate Deploy Link
+              run: thirdweb deploy --file src/contracts/ -k ${{secrets.THIRDWEB_API_KEY}} --ci
+           

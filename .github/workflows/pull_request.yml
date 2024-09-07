@@ -3,7 +3,8 @@ name: Pull request analysis
 on:
     pull_request:
         branches:
-            - main
+            # - main
+            - Javacoin
 
 jobs:
     analyze-code:

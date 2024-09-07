@@ -7,14 +7,15 @@ Router Contracts are all contracts used to deposit into liquidity pools from oth
 ## Getting Started
 
 ### Dependencies
-- **Git**
-  - To know if Git is installed, run `git --version` you should see a response like `git version x.x.x`.
-  - If Git is not installed, head over to [Installing Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-
 - **Foundry**
 
   - To know if Foundry is installed, run `forge --version` you should see a response like `forge x.x.x`.
   - If Foundry is not installed, head over to [Foundry Installation](https://book.getfoundry.sh/getting-started/installation)
+
+- **Slither**
+
+  - To know if Slither is installed, run `slither --version` you should see a response like `x.x.x`.
+  - If Slither is not installed, head over to [How to install slither](https://github.com/crytic/slither?tab=readme-ov-file#how-to-install)
 
 - **Node.js**
 
@@ -54,6 +55,14 @@ yarn testfuzz
 To run only the Fork tests (needs internet connection):
 ```bash
 yarn testfork
+```
+
+### Running Slither
+
+To run the slither static analysis, just open your terminal and type:
+
+```bash
+yarn analyze
 ```
 
 ## Committing

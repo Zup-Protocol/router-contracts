@@ -8,6 +8,7 @@
     "testfuzz": "forge test --mp 'test/fuzz/**/*.sol' -vvv",
     "testfork": "forge test --mp 'test/fork/**/*.sol' -vvv",
     "lint": "solhint --config .solhint.json \"src/**/*.sol\"",
+    "analyze": "slither .",
     "prepare": "husky",
     "postinstall": "forge install"
   },

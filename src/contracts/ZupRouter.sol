@@ -94,8 +94,8 @@ contract ZupRouter is IZupRouter {
 
       address feeReceiver = i_feeController.getFeeReceiver();
 
-      (isToken0Native ? i_wrappedNative : token0.token).transfer(feeReceiver, feeToken0);
-      (isToken1Native ? i_wrappedNative : token1.token).transfer(feeReceiver, feeToken1);
+      (isToken0Native ? i_wrappedNative : token0.token).safeTransfer(feeReceiver, feeToken0);
+      (isToken1Native ? i_wrappedNative : token1.token).safeTransfer(feeReceiver, feeToken1);
     }
 
     (bool success, bytes memory answer) = positionManager.call(depositData);

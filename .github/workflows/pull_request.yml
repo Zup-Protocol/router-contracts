@@ -6,14 +6,11 @@ on:
             - main
 
 jobs:
-    check:
-        name: Analyze code & Run tests
+    analyze-code:
+        name: "Analyze Code"
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
-            
-            - name: Install Foundry
-              uses: foundry-rs/foundry-toolchain@v1.2.0
 
             - name: "Install Node"
               uses: actions/setup-node@v4
@@ -24,10 +21,19 @@ jobs:
             - name: "Run Linter"
               run: yarn solhint --config .solhint.json src/**/*.sol --max-warnings 0
 
-            # - name: "Run Slither"
-            #   uses: crytic/slither-action@v0.4.0
-            #   with:
-            #     fail-on: all
+            - name: "Run Slither"
+              uses: crytic/slither-action@v0.4.0
+              with:
+                fail-on: all
+                
+    run-tests:
+        name: Run tests
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            
+            - name: Install Foundry
+              uses: foundry-rs/foundry-toolchain@v1.2.0
 
             - name: "Run tests"
               run: forge test -vvv

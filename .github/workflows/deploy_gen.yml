@@ -21,17 +21,8 @@ jobs:
             - name: Install Foundry
               uses: foundry-rs/foundry-toolchain@v1
 
-            - name: Generate Deploy Link
-              run: npx thirdweb@latest deploy --file src/contracts/ -k ${{secrets.THIRDWEB_API_KEY}} --ci
-
-    add-link-to-summary:
-        name: "Add Deployment Link to Summary"
-        needs: link-gen
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            
-            - name: Add Deployment Link to Summary
+            - name: Generate Deploy Link & Add to Summary
               run: |
-                  echo "Deployment link: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}" >> $GITHUB_STEP_SUMMARY
-           
+                    npx thirdweb@latest deploy --file src/contracts/ -k ${{secrets.THIRDWEB_API_KEY}} --ci &> tempLog.txt
+                    DEPLOY_LINK=$(cat tempLog.txt | grep -Eo "https://[^ ]+")
+                    echo "${DEPLOY_LINK}" >> $GITHUB_STEP_SUMMARY

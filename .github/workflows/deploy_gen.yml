@@ -21,9 +21,17 @@ jobs:
             - name: Install Foundry
               uses: foundry-rs/foundry-toolchain@v1
 
-            - name: Install Thirdweb CLI
-              run: npm install -g thirdweb
-
             - name: Generate Deploy Link
-              run: thirdweb deploy --file src/contracts/ -k ${{secrets.THIRDWEB_API_KEY}} --ci
+              run: npx thirdweb@latest deploy --file src/contracts/ -k ${{secrets.THIRDWEB_API_KEY}} --ci
+
+    add-link-to-summary:
+        name: "Add Deployment Link to Summary"
+        needs: link-gen
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            
+            - name: Add Deployment Link to Summary
+              run: |
+                  echo "Deployment link: ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}" >> $GITHUB_STEP_SUMMARY
            

@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity 0.8.26;
 
-import {PoolToken} from "src/types/PoolToken.sol";
+import {PoolToken} from "../types/PoolToken.sol";
+import {FeeController} from "../contracts/FeeController.sol";
 
 interface IZupRouter {
   /**
@@ -64,4 +65,9 @@ interface IZupRouter {
     address positionManager,
     bytes calldata depositData
   ) external payable returns (uint256 tokenId);
+
+  /**
+   * @notice get the contract responsible for managing the fees in this contract
+   */
+  function getFeeController() external view returns (FeeController feeController);
 }

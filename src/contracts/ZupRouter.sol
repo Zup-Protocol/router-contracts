@@ -117,6 +117,11 @@ contract ZupRouter is IZupRouter {
     );
   }
 
+  /// @inheritdoc IZupRouter
+  function getFeeController() external view override returns (FeeController feeController) {
+    return i_feeController;
+  }
+
   /**
    * @notice wraps the native token into the wrapped ERC20 version
    *  */

@@ -69,5 +69,10 @@ interface IZupRouter {
   /**
    * @notice get the contract responsible for managing the fees in this contract
    */
-  function getFeeController() external view returns (FeeController feeController);
+  function getFeeController() external view returns (address feeController);
+
+  /**
+   * @notice get the address of the wrapped version of the native token (e.g WETH) used in this contract
+   */
+  function getWrappedNative() external view returns (address wrappedNative);
 }

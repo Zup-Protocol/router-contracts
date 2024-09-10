@@ -118,8 +118,13 @@ contract ZupRouter is IZupRouter {
   }
 
   /// @inheritdoc IZupRouter
-  function getFeeController() external view override returns (FeeController feeController) {
-    return i_feeController;
+  function getFeeController() external view override returns (address feeController) {
+    return address(i_feeController);
+  }
+
+  /// @inheritdoc IZupRouter
+  function getWrappedNative() external view override returns (address wrappedNative) {
+    return address(i_wrappedNative);
   }
 
   /**

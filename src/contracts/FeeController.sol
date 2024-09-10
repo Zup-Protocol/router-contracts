@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity 0.8.26;
 
-import {ZupMath} from "src/libraries/ZupMath.sol";
+import {ZupMath} from "../libraries/ZupMath.sol";
 import {Ownable2Step, Ownable} from "@openzeppelin/contracts/access/Ownable2Step.sol";
 
 contract FeeController is Ownable2Step {

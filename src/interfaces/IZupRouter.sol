@@ -2,7 +2,6 @@
 pragma solidity 0.8.26;
 
 import {PoolToken} from "../types/PoolToken.sol";
-import {FeeController} from "../contracts/FeeController.sol";
 
 interface IZupRouter {
   /**

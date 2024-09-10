@@ -8,6 +8,6 @@ contract ZupRouterGetFeeControllerFuzzTest is Test {
   function test_getFeeController_returnsTheCorrectFeeController(address feeController) external {
     IZupRouter zupRouter = new ZupRouter(address(0), feeController);
 
-    assertEq(address(zupRouter.getFeeController()), feeController);
+    assertEq(zupRouter.getFeeController(), feeController);
   }
 }
